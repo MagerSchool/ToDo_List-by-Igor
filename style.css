@@ -46,7 +46,6 @@ li {
 .todo_body {
   margin: 2rem 5rem;
   padding: 0 1rem;
-  background-color: #fff
 }
 
 .todo_task_new {
@@ -65,7 +64,7 @@ li {
   align-items: center;
   display: flex;
   position: relative;
-  background-color: #f6f7f8;
+  background-color: #fff;
   border-radius: 10px;
   margin: 15px 0;
 }

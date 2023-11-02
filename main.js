@@ -1,5 +1,5 @@
 import './style.css'
-import { setupCounter } from './counter.js'
+import { setupIndex } from './index.js'
 
 document.querySelector('#app').innerHTML = `
   <div>
@@ -29,4 +29,4 @@ document.querySelector('#app').innerHTML = `
   </div>
 `
 
-setupCounter(document.querySelector('#counter'))
+setupIndex(document.querySelector('#index'))

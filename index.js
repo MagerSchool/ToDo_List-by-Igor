@@ -1,17 +1,17 @@
-export function setupCounter(element) {
+export function setupIndex(element) {
   (function () {
     let tasks = {
             current: [{
-                taskId: 1,
+                taskId: doId(),
                 taskContent: "Таск 1",
                 taskState: "current"
             }, {
-                taskId: 2,
+                taskId: doId(),
                 taskContent: "Таск 2",
                 taskState: "current"
             }],
             done: [{
-                taskId: 3,
+                taskId: doId(),
                 taskContent: "Таск 3",
                 taskState: "done"
             }],
@@ -26,6 +26,16 @@ export function setupCounter(element) {
         allTasks = document.getElementById("sum_task"),
         doneTasks = document.getElementById("done_task"),
         addNewTaskField = document.getElementById("todo_task_new");
+
+    const fetchTask = async () => {
+        try {
+            const todos = await fetch('https://jsonplaceholder.typicode.com/todos');
+            return await todos.json();
+        } catch (error) {
+            console.log(error);
+        }
+    }
+    console.log(fetchTask())
 
     function InfoTask() {
         for (const item of tasks.current) {
@@ -97,7 +107,7 @@ export function setupCounter(element) {
 
     function addTasks(str) {
         let elem = {
-            taskId: tasks.allTasks + 1,
+            taskId: doId(),
             taskContent: str,
             taskState: "current"
         };
@@ -106,6 +116,9 @@ export function setupCounter(element) {
         allTasks.innerHTML = tasks.allTasks;
     }
 
+    function doId() {
+        return Math.random().toString(36).substr(2, 16);
+    }
 
     InfoTask();
 
