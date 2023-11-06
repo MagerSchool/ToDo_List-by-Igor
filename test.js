@@ -1,5 +1,4 @@
-export function setupIndex(element) {
-  (function () {
+(function () {
     let tasks = {
             current: [{
                 taskId: doId(),
@@ -22,22 +21,12 @@ export function setupIndex(element) {
                 return this.done.length;
             }
         },
-        tasksList = document.getElementById("todo_list"),
-        allTasks = document.getElementById("sum_task"),
-        doneTasks = document.getElementById("done_task"),
-        addNewTaskField = document.getElementById("todo_task_new");
+        tasksList = document.getElementById("app__list"),
+        allTasks = document.getElementById("js-all-tasks"),
+        doneTasks = document.getElementById("js-done-tasks"),
+        addNewTaskField = document.getElementById("app__task-new");
 
-    const fetchTask = async () => {
-        try {
-            const todos = await fetch('https://jsonplaceholder.typicode.com/todos');
-            return await todos.json();
-        } catch (error) {
-            console.log(error);
-        }
-    }
-    console.log(fetchTask())
-
-    function InfoTask() {
+    function INIT() {
         for (const item of tasks.current) {
             createItem(item);
         }
@@ -50,23 +39,22 @@ export function setupIndex(element) {
 
     function createItem(el) {
         let item = document.createElement('li'),
-            remove = document.createElement('img'),
+            remove = document.createElement('div'),
             text = document.createElement('span');
-        remove.classList.add('todo_list-remove');
-        remove.src = './public/trash.svg'
+        remove.classList.add('app__list-remove');
         remove.addEventListener('click', function () {
             removeTask(this);
         });
-        text.classList.add('todo_list-text');
+        text.classList.add('app__list-text');
         text.addEventListener('click', function () {
             doneTask(this);
         });
         switch (el.taskState) {
             case 'done':
-                item.classList.add('todo_list-item', 'todo_list-item--done');
+                item.classList.add('app__list-item', 'app__list-item--done');
                 break;
             default:
-                item.classList.add('todo_list-item');
+                item.classList.add('app__list-item');
         }
         item.id = el.taskId;
         text.innerHTML = el.taskContent;
@@ -78,10 +66,10 @@ export function setupIndex(element) {
     function doneTask(el) {
         let elem = el.parentNode,
             elemId = elem.id,
-            elemState = elem.classList.contains('todo_list-item--done');
+            elemState = elem.classList.contains('app__list-item--done');
 
         const [itemsRemove, itemsAdd] = elemState ? [tasks.done, tasks.current] : [tasks.current, tasks.done];
-        elem.classList.toggle('todo_list-item--done');
+        elem.classList.toggle('app__list-item--done');
         for (const [index, item] of itemsRemove.entries()) {
             if (item.taskId !== elemId) continue;
             itemsAdd.push(item);
@@ -93,7 +81,7 @@ export function setupIndex(element) {
     function removeTask(el) {
         let removeEl = el.parentNode,
             removeElId = removeEl.id,
-            removeElState = removeEl.classList.contains('todo_list-item--done');
+            removeElState = removeEl.classList.contains('app__list-item--done');
 
         removeEl.remove();
         const items = removeElState ? tasks.done : tasks.current;
@@ -120,7 +108,7 @@ export function setupIndex(element) {
         return Math.random().toString(36).substr(2, 16);
     }
 
-    InfoTask();
+    INIT();
 
     addNewTaskField.addEventListener('keyup',function (e) {
         if(e.keyCode === 13) {
@@ -129,5 +117,4 @@ export function setupIndex(element) {
         }
     })
 
-  })();
-}
+})();

@@ -5,7 +5,33 @@
     <title>Todo List</title>
   </head>
   <body>
-    <div id="app"></div>
+    <div id="app">
+      <div>
+        <div class="todo_header">
+          <div class="todo_title">
+            <span class="todo_title_text">To Do List</span>
+          </div>
+          <div class="todo_info">
+            <div class="todo_info_item">
+              <span class="todo_info_text">Number of tasks:</span>
+              <span class="todo_info_number" id="sum_task"></span>
+            </div>
+            <div class="todo_info_item">
+              <span class="todo_info_text">Completed tasks:</span>
+              <span class="todo_info_number" id="done_task"></span>
+            </div>
+          </div>
+        </div>
+        <div class="todo_body" id="todo_body">
+          <p class="todo_body_text" id="stub">
+            Задач нет
+          </p>
+        </div>
+        <form class="todo_input" id="form">
+            <input required type="text" class="todo_task_new" id="todo_task_new" placeholder="Add new task">
+        </form>
+      </div>
+    </div>
     <script type="module" src="/main.js"></script>
   </body>
 </html>
